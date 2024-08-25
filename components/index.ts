@@ -1,2 +1,7 @@
 import Hero from "./Hero";
-export { Hero };
+import CustomButton from "./CustomButton";
+
+export { 
+    Hero,
+    CustomButton
+};
