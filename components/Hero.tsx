@@ -24,11 +24,11 @@ const Hero = () => {
             <div className="hero__image-container">
                 <div className="hero__image">
                     <Image
-                        src="/path-to-your-image.jpg" // Replace with the actual image path
-                        alt="Hero Image"
-                        layout="fill" // Adjust the layout as per your need (e.g., "intrinsic", "responsive")
-                        objectFit="cover" // Adjust object fit based on how you want the image to be displayed
+                        src="/hero.png" // Replace with the actual image path
+                        alt="Hero"
+                        fill className='object-cover'
                     />
+                    <div className="hero__image-overlay"></div>
                 </div>
             </div>
 
