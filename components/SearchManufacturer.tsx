@@ -6,6 +6,7 @@ import React, { Fragment } from 'react'
 import Image from 'next/image';
 import { useState } from 'react';
 import { manufacturers } from '@/constants'
+import { CheckIcon } from '@heroicons/react/20/solid';
 
 const SearchManufacturer = ({
     manufacturer,
@@ -64,7 +65,27 @@ const SearchManufacturer = ({
                                         }
                                         value={item}
                                     >
-                                        {item}
+                                        {({ selected, active }) => (
+                                            <>
+                                                <span
+                                                    className={`block truncate ${selected ? 'font-medium' : 'font-normal'
+                                                        }`}
+                                                >
+                                                    {item}
+                                                </span>
+                                                {selected ? (
+                                                    <span
+                                                        className={`
+                                                            absolute inset-y-0 left-0 flex items-center pl-3 
+                                                            ${active
+                                                                ? 'text-white'
+                                                                : 'text-teal-600'
+                                                            }`}
+                                                    ></span>
+                                                ) : null}
+
+                                            </>
+                                        )}
                                     </ComboboxOption>
                                 )
                                 )}
