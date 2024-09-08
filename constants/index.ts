@@ -1,3 +1,5 @@
+// Asked ChatGpt for a list with all car manufacturers and years of production.
+
 export const manufacturers = [
     "Acura",
     "Alfa Romeo",

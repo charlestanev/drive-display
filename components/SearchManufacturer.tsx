@@ -1,16 +1,28 @@
 'use client';
 
-import { Combobox, ComboboxButton, ComboboxInput, ComboboxOptions, Transition } from '@headlessui/react'
+import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from '@headlessui/react'
 import { SearchManufacturerProps } from '@/types'
 import React, { Fragment } from 'react'
 import Image from 'next/image';
 import { useState } from 'react';
+import { manufacturers } from '@/constants'
 
 const SearchManufacturer = ({
     manufacturer,
     setManufacturer
 }: SearchManufacturerProps) => {
     const [query, setQuery] = useState('')
+
+    const filteredManufacturers =
+        query === ""
+            ? manufacturers
+            : manufacturers.filter((item) => (
+                item.toLowerCase()
+                    .replace(/\s+/g, "")
+                    .includes(query.toLowerCase()
+                        .replace(/\s+/g, "")
+                    )
+            ));
 
     return (
         <div className='search-manufacturer'>
@@ -28,7 +40,7 @@ const SearchManufacturer = ({
                     <ComboboxInput
                         className="search-manufacturer__input"
                         placeholder='Volkswagen'
-                        displayValue={(manufacturer:string) => manufacturer}
+                        displayValue={(manufacturer: string) => manufacturer}
                         onChange={(event) => setQuery(event.currentTarget.value)}
                     />
                     <Transition
@@ -39,7 +51,23 @@ const SearchManufacturer = ({
                         afterLeave={() => setQuery('')}
                     >
                         <ComboboxOptions>
-
+                            {
+                                filteredManufacturers.map((item) => (
+                                    <ComboboxOption
+                                        key={item}
+                                        className={({ active }) => `
+                                        relative search-manufacturer__option 
+                                            ${active
+                                                ? 'bg-primary-blue text-white'
+                                                : 'text-gray-900'
+                                            }`
+                                        }
+                                        value={item}
+                                    >
+                                        {item}
+                                    </ComboboxOption>
+                                )
+                                )}
                         </ComboboxOptions>
                     </Transition>
                 </div>
